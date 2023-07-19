@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+  <title>Web Form</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    
+    body {
+      background-color: #e1ebf1; 
+    }
+    .form-container {
+      max-width: 800px; 
+      margin: 0 auto;
+      padding: 20px;
+      background: #e1ebf1; 
+      border-radius: 5px;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .form-container input[type="text"],
+    .form-container input[type="email"],
+    .form-container textarea {
+      border: none;
+      border-bottom: 1px solid #ccc;
+      padding: 10px;
+      margin-bottom: 10px;
+      width: 100%;
+      background: transparent;
+    }
+
+    .form-container input[type="submit"] {
+      background: #08ddb6;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+
+    
+    .form-container > div {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid #ccc; 
+      padding-bottom: 10px; 
+      margin-bottom: 15px; 
+      position: relative; 
+    }
+
+    .form-container > div > div {
+      flex-basis: 48%;
+    }
+    
+   
+    .form-container > div > div:first-child {
+      margin-right: 10px;
+    }
+    
+    .form-container h4 {
+      color: #2fc6f4; 
+    }
+
+    .center-align {
+      display: flex;
+      justify-content: center;
+    }
+    .required-label::before {
+      content: "*"; 
+      color: red;
+      margin-right: 3px;
+    }
+    
+   
+    .error-message {
+      color: red;
+      font-size: 12px;
+      position: absolute;
+      bottom: -15px; 
+      display: none; 
+    }
+    .form{
+        margin-top: 15%;
+    }
+    
+    
+    .required-field.invalid .error-message {
+      display: block;
+    }
+    
+   
+    .less-bold {
+      font-weight: normal;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h4 class="center-align">CONTACT</h4>
+    <h1 class="center-align">Let's connect</h1>
+    <h3 class="center-align less-bold">Please fill out the form below and we'll reach out right away.</h3>
+    <div class="form">
+    <form id="myForm">
+      <div>
+        <div style="display: flex;">
+          <div style="flex-basis: 50%; margin-right: 10px;"> 
+            <label for="firstName" class="required-label">First Name:</label>
+            <input type="text" id="firstName" name="firstName" required>
+            <span class="error-message">This field is required</span>
+          </div>
+          <div style="flex-basis: 50%;">
+            <label for="lastName" class="required-label">Last Name:</label>
+            <input type="text" id="lastName" name="lastName" required>
+            <span class="error-message">This field is required</span>
+          </div>
+        </div>
+      </div>
+
+      <div style="display: flex;">
+        <div style="flex-basis: 50%; margin-right: 10px;"> 
+          <label for="companyName" class="required-label">Company Name:</label>
+          <input type="text" id="companyName" name="companyName" required>
+        </div>
+        <div style="flex-basis: 50%;">
+          <label for="email" class="required-label">Email:</label>
+          <input type="email" id="email" name="email" required>
+          <span class="error-message">This field is required</span>
+        </div>
+      </div>
+
+      <div style="display: flex;">
+        <div style="flex-basis: 50%; margin-right: 10px;"> 
+          <label for="jobTitle" class="required-label">Job Title:</label>
+          <input type="text" id="jobTitle" name="jobTitle" required>
+          <span class="error-message">This field is required</span>
+        </div>
+        <div style="flex-basis: 50%;">
+          <label for="like to" class="required-label">I'd like to:</label>
+          <input type="text" id="like to" name="like to" required>
+          <span class="error-message">This field is required</span>
+        </div>
+      </div>
+
+      <label for="like to" class="required-label">how did you hear about us:</label>
+          <input type="text" id="like to" name="like to" required>
+          <span class="error-message">This field is required</span> 
+      <label for="additionalInfo">Anything you'd like to know?</label>
+      <textarea id="additionalInfo" name="additionalInfo" rows="4"></textarea>
+
+      <div class="center-align">
+        <input type="submit" value="Submit">
+      </div>
+    </form>
+  </div>
+</div>
+  <script>
+   
+    document.getElementById("myForm").addEventListener("submit", function(event) {
+      event.preventDefault(); 
+
+      
+      var firstName = document.getElementById("firstName").value;
+      var lastName = document.getElementById("lastName").value;
+      var email = document.getElementById("email").value;
+      var companyName = document.getElementById("companyName").value;
+      var jobTitle = document.getElementById("jobTitle").value;
+      var hearAbout = document.getElementById("hearAbout").value;
+      var additionalInfo = document.getElementById("additionalInfo").value;
+
+      
+      console.log("First Name: " + firstName);
+      console.log("Last Name: " + lastName);
+      console.log("Email: " + email);
+      console.log("Company Name: " + companyName);
+      console.log("Job Title: " + jobTitle);
+      console.log("How did you hear about us?: " + hearAbout);
+      console.log("Anything you'd like to know?: " + additionalInfo);
+
+     
+      var requiredFields = document.querySelectorAll("[required]");
+      var isFormValid = true;
+      for (var i = 0; i < requiredFields.length; i++) {
+        var field = requiredFields[i];
+        var errorSpan = field.nextElementSibling;
+        if (field.value.trim() === "") {
+          errorSpan.style.display = "block"; 
+          field.parentNode.classList.add("invalid"); 
+          isFormValid = false;
+        } else {
+          errorSpan.style.display = "none"; 
+          field.parentNode.classList.remove("invalid"); 
+        }
+      }
+
+      
+      if (isFormValid) {
+        
+
+       
+        document.getElementById("myForm").reset();
+      }
+    });
+  </script>
+</body>
+</html>
